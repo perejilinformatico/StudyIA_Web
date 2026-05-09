@@ -1,0 +1,97 @@
+---
+  import Layout2 from "../layouts/Layout_Novedades.astro";
+  import '../styles/boton_caricaturesco.css';
+---
+ 
+<Layout2>
+    <div class="flex justify-center items-center flex-col text-center p-50 gap-3.5">
+    <h1 class="flex justify-center items-center gap-3.5">
+      <img src="Favicon_icon.svg" alt="" width="35px" height="36px" />
+      StudyIA
+    </h1>
+    <form class="flex justify-center items-center flex-col gap-3.5 text-left" onsubmit="event.preventDefault(); window.enviarDatos()">
+        <label for="email">Introduce tu email</label>
+        <input type="email" name="email" id="email" placeholder="email..." required>
+        
+        <label for="nombre">Introduce tu nombre</label>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre..." required>
+        
+        <button type="button" class="boton boton-rojo" onclick="window.enviarDatos()">Enviar</button>
+    </form>
+    </div>
+</Layout2>
+ 
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+    h1 {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 800;
+    }
+    input {
+        width: 200px;
+        padding: 10px;
+        border: solid rgb(28, 28, 28) 1px;
+        border-radius: 10px;
+    }
+</style>
+ 
+<script is:inline>
+  // Hacer la función global para que sea accesible desde onclick
+  window.enviarDatos = async function() {
+    // Obtener los valores
+    const email = document.querySelector("#email").value;
+    const nombre = document.querySelector("#nombre").value;
+ 
+    // Validar que no estén vacíos
+    if (!email || !nombre) {
+      alert("Por favor completa todos los campos");
+      return;
+    }
+ 
+    try {
+      const response = await fetch("https://sheetdb.io/api/v1/896ohr4zxnajp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            nombre: nombre,
+            gmail: email,
+          },
+        }),
+      });
+ 
+      const resultado = await response.json();
+      console.log("Éxito:", resultado);
+      alert("¡Datos enviados correctamente!");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error al enviar los datos");
+    }
+  };
+ 
+  // Leer parámetros de la URL al cargar la página
+  window.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    const nombre = params.get('password'); // En tu URL viene como 'password'
+ 
+    // Si hay parámetros en la URL, llenar los campos
+    if (email) {
+      document.querySelector("#email").value = decodeURIComponent(email);
+    }
+    if (nombre) {
+      document.querySelector("#nombre").value = decodeURIComponent(nombre);
+    }
+ 
+    // Si ambos parámetros existen, enviar automáticamente
+    if (email && nombre) {
+      setTimeout(() => {
+        console.log("Parámetros detectados, enviando automáticamente...");
+        window.enviarDatos();
+      }, 500);
+    }
+  });
+</script>

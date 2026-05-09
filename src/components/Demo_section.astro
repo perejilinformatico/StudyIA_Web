@@ -1,1 +1,24 @@
-<h1 class="text-2xl text-center p-5 m-5" id="demo">Demo no disponible aun :(</h1>
+<div class="p-10 text-center bg-red-300 flex justify-center items-center" id="demo">
+  <div>
+        <h1 class="text-3xl font-bold">
+        ¡Pronto disponible!
+    </h1>
+    <p class="text-lg m-5 text-zinc-900">
+        Esta sección estará disponible pronto. ¡No te pierdas las novedades!
+    </p>
+    <button class="boton boton-rojo btn-primary m-10" onclick="window.location.href = '/novedades';">Recordar Novedades</button>
+  </div>
+  <div>
+        <img src="/Foto.png" alt="Imagen de demostración" class="rounded-3xl m-3" />
+  </div>
+</div>
+
+<style>
+    #demo {
+    }
+    @media (max-width: 768px) {
+        #demo {
+            flex-direction: column;
+        }
+    }
+</style>
