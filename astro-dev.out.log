@@ -1,0 +1,69 @@
+[vite] connected.
+[2m22:55:52[22m [34m[types][39m Generated [2m2ms[22m
+[2m22:55:52[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[42m[1m astro [22m[49m [32mv6.3.1[39m [2mready in[22m 1795 [2mms[22m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4321/[39m
+[2m22:55:52[22m [32mwatching for file changes...[39m
+[2m22:56:01[22m [34m[200][39m / [2m31ms[22m
+[2m22:56:05[22m [34m[200][39m / [2m3ms[22m
+[33m[1m22:56:05[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m
+[2m22:56:07[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m22:56:07[22m [34m[200][39m / [2m7ms[22m
+[33m[1m22:56:07[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m
+[2m22:56:12[22m [34m[200][39m / [2m2ms[22m
+[33m[1m22:56:13[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m
+[2m22:56:40[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m22:56:40[22m [34m[200][39m / [2m7ms[22m
+[33m[1m22:56:41[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m
+[2m22:56:50[22m [34m[200][39m / [2m3ms[22m
+[2m23:31:09[22m [34m[watch][39m /src/components/Header.astro?astro&type=style&index=0&lang.css
+[2m23:31:09[22m [34m[watch][39m src/components/Header.astro
+[vite] program reload
+[2m23:31:27[22m [34m[watch][39m /src/components/Header.astro?astro&type=style&index=0&lang.css
+[2m23:31:27[22m [34m[watch][39m src/components/Header.astro
+[vite] program reload
+[2m23:31:41[22m [34m[watch][39m src/components/Header.astro
+[2m23:31:44[22m [34m[watch][39m src/components/Header.astro
+[2m23:31:49[22m [34m[watch][39m src/components/Header.astro
+[2m23:31:59[22m [34m[watch][39m src/components/Header.astro
+[2m23:33:06[22m [34m[watch][39m /src/components/Header.astro?astro&type=style&index=0&lang.css
+[2m23:33:06[22m [34m[watch][39m src/components/Header.astro
+[vite] program reload
+[2m23:34:57[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:11[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:19[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:23[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:38[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:53[22m [34m[watch][39m /src/styles/global.css
+[2m23:35:58[22m [34m[watch][39m /src/layouts/Layout.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:36:02[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:36:10[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:36:25[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:36:28[22m [34m[watch][39m src/components/Header.astro
+[2m23:36:49[22m [34m[watch][39m /src/styles/global.css
+[2m23:36:58[22m [34m[watch][39m /src/styles/global.css
+[2m23:37:52[22m [34m[watch][39m /src/styles/global.css
+[2m23:37:54[22m [34m[watch][39m /src/styles/global.css
+[2m23:38:02[22m [34m[watch][39m /src/styles/global.css
+[2m23:38:26[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:38:37[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:38:49[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:39:35[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:39:43[22m [34m[watch][39m /src/components/Hero.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:40:44[22m [34m[watch][39m /src/layouts/Layout.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:40:47[22m [34m[watch][39m /src/layouts/Layout.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:42:20[22m [34m[watch][39m /src/layouts/Layout.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:42:28[22m [34m[watch][39m /src/layouts/Layout.astro?astro&type=style&index=0&lang.css, /src/styles/global.css
+[2m23:43:22[22m [34m[200][39m / [2m12ms[22m
+[33m[1m23:43:22[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m
+[2m23:43:25[22m Configuration file updated. Restarting...
+[vite] program reload
+[vite] connected.
+[2m23:43:26[22m [34m[200][39m / [2m11ms[22m
+[33m[1m23:43:26[22m [WARN] [vite][39m [33mFiles in the public directory are served at the root path.
+Instead of [36m/public/blob-haikei.svg[33m, use [36m/blob-haikei.svg[33m.[39m

@@ -1,0 +1,55 @@
+---
+import '../styles/global.css'
+import Lenis from "lenis";
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/Favicon_icon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>StudyIA - Web Oficial</title>
+		<meta name="description" content="Bienvenido a StudyIA, tu plataforma de aprendizaje de inteligencia artificial">
+		<meta name="type" content="website" />
+		<meta name="author" content="Santiago Cussit Maximo" />
+		<meta name="robots" content="index, follow" />
+		<meta name="keywords" content="inteligencia artificial, aprendizaje, studyia" />
+		<meta name="theme-color" content="D84040" />
+		<meta property="og:title" content="StudyIA - Web Oficial" />
+		<meta property="og:description" content="Bienvenido a StudyIA, tu plataforma de aprendizaje de inteligencia artificial" />
+		<meta property="og:type" content="website" />
+		<meta property="og:author" content="Santiago Cussit Maximo" />
+		<meta property="twitter:title" content="StudyIA - Web Oficial" />
+		<meta property="twitter:description" content="Bienvenido a StudyIA, tu plataforma de aprendizaje de inteligencia artificial" />	
+		<meta property="twitter:card" content="summary_large_image" />
+	</head>
+	<body>
+		<slot />
+	</body>
+	<script>
+      import Lenis from "lenis";
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        smoothWheel: true,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
