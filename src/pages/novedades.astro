@@ -2,94 +2,184 @@
   import Layout2 from "../layouts/Layout_Novedades.astro";
   import '../styles/boton_caricaturesco.css';
 ---
- 
+
 <Layout2>
-    <div class="flex justify-center items-center flex-col text-center p-50 gap-3.5">
+  <div class="flex justify-center items-center flex-col text-center p-50 gap-3.5">
     <h1 class="flex justify-center items-center gap-3.5">
-      <img src="Favicon_icon.svg" alt="" width="35px" height="36px" />
+      <svg class="studyia-character" width="48" height="48" viewBox="0 0 141 142" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="141" height="142" rx="30" fill="#D84040"/>
+        <ellipse cx="39.5" cy="98" rx="31.5" ry="31" fill="#D9D9D9"/>
+        <ellipse cx="102.5" cy="36" rx="31.5" ry="31" fill="#D9D9D9"/>
+        <path d="M65 87C65 93.0751 60.0751 98 54 98C47.9249 98 43 93.0751 43 87C43 80.9249 47.9249 76 54 76C60.0751 76 65 80.9249 65 87Z" fill="#2B2A2A"/>
+        <path d="M129 25C129 31.0751 124.075 36 118 36C111.925 36 107 31.0751 107 25C107 18.9249 111.925 14 118 14C124.075 14 129 18.9249 129 25Z" fill="#2B2A2A"/>
+        <path class="character-mouth" d="M76 105C84 113 96 112 104 104" stroke="#2B2A2A" stroke-width="8" stroke-linecap="round"/>
+      </svg>
       StudyIA
     </h1>
-    <form class="flex justify-center items-center flex-col gap-3.5 text-left" onsubmit="event.preventDefault(); window.enviarDatos()">
-        <label for="email">Introduce tu email</label>
-        <input type="email" name="email" id="email" placeholder="email..." required>
-        
-        <label for="nombre">Introduce tu nombre</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Nombre..." required>
-        
-        <button type="button" class="boton boton-rojo" onclick="window.enviarDatos()">Enviar</button>
+
+    <form class="flex justify-center items-center flex-col gap-3.5 text-left">
+      <label for="email">Introduce tu email</label>
+      <input type="email" name="email" id="email" placeholder="email..." required>
+
+      <label for="nombre">Introduce tu nombre</label>
+      <input type="text" name="nombre" id="nombre" placeholder="Nombre..." required>
+
+      <button type="button" class="boton boton-rojo" id="enviar">Enviar</button>
     </form>
-    </div>
+
+    <p class="respuesta-ia" id="respuesta-ia" aria-live="polite"></p>
+  </div>
 </Layout2>
- 
+
 <style>
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-    h1 {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        font-weight: 800;
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+  h1 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+  }
+
+  input {
+    width: 200px;
+    padding: 10px;
+    border: solid rgb(28, 28, 28) 1px;
+    border-radius: 10px;
+  }
+
+  .studyia-character {
+    overflow: visible;
+  }
+
+  .character-mouth {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: none;
+  }
+
+  .studyia-character.is-speaking .character-mouth {
+    animation: mouth-talk 0.22s ease-in-out infinite;
+  }
+
+  .respuesta-ia {
+    max-width: 420px;
+    min-height: 24px;
+    margin-top: 12px;
+    color: #27272a;
+    text-align: center;
+  }
+
+  @keyframes mouth-talk {
+    0%, 100% {
+      transform: translateY(0) scaleY(1);
     }
-    input {
-        width: 200px;
-        padding: 10px;
-        border: solid rgb(28, 28, 28) 1px;
-        border-radius: 10px;
+
+    50% {
+      transform: translateY(4px) scaleY(1.9);
     }
+  }
 </style>
- 
+
 <script is:inline>
-  // Hacer la función global para que sea accesible desde onclick
-  window.enviarDatos = async function() {
-    // Obtener los valores
-    const email = document.querySelector("#email").value;
-    const nombre = document.querySelector("#nombre").value;
- 
-    // Validar que no estén vacíos
+  const form = document.querySelector("form");
+  const button = document.querySelector("#enviar");
+  const character = document.querySelector(".studyia-character");
+  const answerOutput = document.querySelector("#respuesta-ia");
+
+  const stopMouthAnimation = () => {
+    character?.classList.remove("is-speaking");
+  };
+
+  const sayAnswer = (text) => {
+    if (!("speechSynthesis" in window)) {
+      stopMouthAnimation();
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const voice = new SpeechSynthesisUtterance(text);
+    voice.lang = "es-AR";
+    voice.rate = 1;
+    voice.pitch = 1.05;
+
+    character?.classList.add("is-speaking");
+    voice.onend = stopMouthAnimation;
+    voice.onerror = stopMouthAnimation;
+
+    window.speechSynthesis.speak(voice);
+
+    const estimatedTime = Math.max(2200, text.length * 80);
+    setTimeout(stopMouthAnimation, estimatedTime);
+  };
+
+  const call = async (nombre, email) => {
+    const response = await fetch("/api/groq", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ nombre, email }),
+    });
+
+    if (!response.ok) {
+      throw new Error("No se pudo conectar con Groq");
+    }
+
+    return response.json();
+  };
+
+  window.enviarDatos = async () => {
+    const email = document.querySelector("#email").value.trim();
+    const nombre = document.querySelector("#nombre").value.trim();
+
     if (!email || !nombre) {
       alert("Por favor completa todos los campos");
       return;
     }
- 
+
     try {
-      const response = await fetch("https://sheetdb.io/api/v1/896ohr4zxnajp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: {
-            nombre: nombre,
-            gmail: email,
-          },
-        }),
-      });
- 
-      const resultado = await response.json();
-      console.log("Éxito:", resultado);
-      alert("¡Datos enviados correctamente!");
-      window.location.href = "/";
+      button.disabled = true;
+      button.textContent = "Pensando...";
+      answerOutput.textContent = "";
+
+      const resultado = await call(nombre, email);
+      const respuesta = resultado.answer;
+
+      answerOutput.textContent = respuesta;
+      sayAnswer(respuesta);
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al enviar los datos");
+      const respuesta = "Perdon, tuve un problema conectandome con la inteligencia artificial.";
+      answerOutput.textContent = respuesta;
+      sayAnswer(respuesta);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Enviar";
     }
   };
- 
-  // Leer parámetros de la URL al cargar la página
-  window.addEventListener('DOMContentLoaded', function() {
+
+  button?.addEventListener("click", window.enviarDatos);
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    window.enviarDatos();
+  });
+
+  window.addEventListener("DOMContentLoaded", function() {
     const params = new URLSearchParams(window.location.search);
-    const email = params.get('email');
-    const nombre = params.get('password'); // En tu URL viene como 'password'
- 
-    // Si hay parámetros en la URL, llenar los campos
+    const email = params.get("email");
+    const nombre = params.get("password");
+
     if (email) {
       document.querySelector("#email").value = decodeURIComponent(email);
     }
+
     if (nombre) {
       document.querySelector("#nombre").value = decodeURIComponent(nombre);
     }
- 
-    // Si ambos parámetros existen, enviar automáticamente
+
     if (email && nombre) {
       setTimeout(() => {
-        console.log("Parámetros detectados, enviando automáticamente...");
+        console.log("Parametros detectados, enviando automaticamente...");
         window.enviarDatos();
       }, 500);
     }
